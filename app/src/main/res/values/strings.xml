@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">RxJavaDemo</string>
+    <string name="button1">指定线程</string>
+    <string name="button2">基本用法</string>
+    <string name="button3">指定线程</string>
+    <string name="button4">指定线程</string>
+</resources>
