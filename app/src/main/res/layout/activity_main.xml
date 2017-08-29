@@ -26,6 +26,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/button4"/>
+    <Button
+        android:id="@+id/button5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/button5"/>
+    <Button
+        android:id="@+id/ev_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="跳转页面"/>
 
     <TextView
         android:id="@+id/text_view"

@@ -1,6 +1,7 @@
 package com.example.administrator.rxjavademo;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -9,6 +10,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.administrator.bean.Student;
+import com.example.administrator.retrofitdemo.RetrofitDemo;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import rx.Observable;
 import rx.Observer;
@@ -21,10 +27,8 @@ import rx.schedulers.Schedulers;
 public class MainActivity extends Activity implements View.OnClickListener {
 
     private static final String TAG = "mrgao";
-    private Button button1;
-    private Button button2;
-    private Button button3;
-    private Button button4;
+    private Button button1,button2,button3,button4,button5;
+    private Button ev_button;
     private TextView text_view;
     private StringBuffer stringBuffer;
 
@@ -32,35 +36,33 @@ public class MainActivity extends Activity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        button1 = (Button) findViewById(R.id.button1);
-        button2 = (Button) findViewById(R.id.button2);
-        button3 = (Button) findViewById(R.id.button3);
-        button4 = (Button) findViewById(R.id.button4);
-        text_view = (TextView) findViewById(R.id.text_view);
+        initView();
+        initListener();
+
+    }
+
+    private void initListener() {
         button1.setOnClickListener(this);
         button2.setOnClickListener(this);
         button3.setOnClickListener(this);
         button4.setOnClickListener(this);
+        button5.setOnClickListener(this);
+        ev_button.setOnClickListener(this);
         stringBuffer = new StringBuffer();
+        EventBus.getDefault().register(this);
 
-/*        Observable.create(new ObservableOnSubscribe<Integer>() {
-            @Override
-            public void subscribe(ObservableEmitter<Integer> e) throws Exception {
-                e.onNext(1);
-                e.onNext(2);
-                Utils.checkNotMain();
-                e.onNext(3);
-                e.onComplete();
-                e.onNext(4);
-                e.onNext(5);
-            }
-        }).subscribe(new Consumer<Integer>() {
-            @Override
-            public void accept(Integer integer) throws Exception {
-                Log.e(TAG,"integer:"+integer);
-            }
-    });*/
     }
+
+    private void initView() {
+        button1 = (Button) findViewById(R.id.button1);
+        button2 = (Button) findViewById(R.id.button2);
+        button3 = (Button) findViewById(R.id.button3);
+        button4 = (Button) findViewById(R.id.button4);
+        button5 = (Button) findViewById(R.id.button5);
+        ev_button = (Button) findViewById(R.id.ev_button);
+        text_view = (TextView) findViewById(R.id.text_view);
+    }
+
 
     @Override
     public void onClick(View v) {
@@ -134,8 +136,48 @@ public class MainActivity extends Activity implements View.OnClickListener {
                             }
                         }).subscribe((Action1<? super Object>) subscriber);
                 break;
+
             case R.id.button4:
+                break;
+            case R.id.button5:
+                Intent intent1 = new Intent(MainActivity.this, RetrofitDemo.class);
+                startActivity(intent1);
+                break;
+            case R.id.ev_button://EventBus
+                Intent intent = new Intent(MainActivity.this, EventBusActivity.class);
+                startActivity(intent);
                 break;
         }
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Subscribe
+    public void onEvent(FirstEvent event) {
+        String msg = "onEvent收到了消息：" + event.getMsg();
+        Log.e("harvic", msg);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void OnEventMainThread(FirstEvent event) {
+        String msg = "onEventMainThread收到了消息：" + event.getMsg();
+        Log.e("harvic", msg);
+        text_view.setText(event.getMsg());
+        Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
+    }
+    @Subscribe
+    public void onEventBackgroundThread(FirstEvent event){
+        String msg = "onEventBackgroundThread收到了消息：" + event.getMsg();
+        Log.e("harvic", msg);
+    }
+    @Subscribe
+    public void onEventAsync(FirstEvent event){
+        String msg = "onEventAsync收到了消息：" + event.getMsg();
+        Log.e("harvic", msg);
+    }
+
 }
