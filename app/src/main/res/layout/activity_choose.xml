@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.administrator.rxjavademo.MainActivity">
+    <Button
+    android:id="@+id/recycle_button1"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@string/recycle_button1"/>
+    <Button
+        android:id="@+id/recycle_button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/recycle_button2"/>
+    <Button
+        android:id="@+id/recycle_button3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/recycle_button3"/>
+</LinearLayout>

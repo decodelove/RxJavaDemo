@@ -10,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.administrator.bean.Student;
+import com.example.administrator.recyclerviewdemo.ChooseActivity;
 import com.example.administrator.retrofitdemo.RetrofitDemo;
 
 import org.greenrobot.eventbus.EventBus;
@@ -111,7 +112,9 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 });
                 break;
             case R.id.button3:
-                Student[] students = new Student[]{};
+                startActivity(new Intent(MainActivity.this, ChooseActivity.class));
+//                startActivity(new Intent(MainActivity.this, ChooseActivity.class));
+                /*Student[] students = new Student[]{};
                 Subscriber<String> subscriber = new Subscriber<String>() {
                     @Override
                     public void onCompleted() {
@@ -134,7 +137,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
                             public String call(Student student) {
                                 return student.getName();
                             }
-                        }).subscribe((Action1<? super Object>) subscriber);
+                        }).subscribe((Action1<? super Object>) subscriber);*/
                 break;
 
             case R.id.button4:

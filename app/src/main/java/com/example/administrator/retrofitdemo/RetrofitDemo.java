@@ -56,13 +56,13 @@ public class RetrofitDemo extends Activity {
                 });
 
                 Retrofit retrofit = new Retrofit.Builder()
-                        .baseUrl("http://www.oschina.net/action/apiv2/")
+                        .baseUrl("https://api.douban.com/v2/")
                         .addConverterFactory(GsonConverterFactory.create(gson))
                         .client(client)
                         .build();
 
                 apiService = retrofit.create(APIService.class);
-                Call<Users> usersCall = apiService.loadUsers();
+                Call<Users> usersCall = apiService.loadUsers("小王子", "", 0, 3);
                 /* //同步线程
                 Response<Users> execute = usersCall.execute();
                 Log.e("mrgao","data:"+execute.code());*/
@@ -70,8 +70,17 @@ public class RetrofitDemo extends Activity {
                usersCall.enqueue(new Callback<Users>() {
                     @Override
                     public void onResponse(Response<Users> response) {
-                        Log.e("mrgao", "respose Code:" + response.code()+",response.body():"+response.body()+",response.message():"+response.message());
-                        retrofit_tv.setText("respose Code:" + response.code()+",response.body():"+response.body()+",response.message():"+response.message());
+                        Log.e("mrgao", "respose Code:" + response.code()+",response.body().getBooks().get(1).getAuthor_intro():"+response.body().getBooks().get(1).getAuthor_intro()+",response.message():"+response.message());
+
+                        retrofit_tv.setText("respose Code:" + response.code()
+                                +"\n-------------------------------------"
+                                +",\nresponse.body():"+response.body().getBooks().get(1).getAuthor_intro()
+                                +"\n-------------------------------------"
+                                +",\nresponse.message():"+response.message()
+                                +"\n-------------------------------------"
+                                +",\nresponse.headers():"+response.headers()
+                                +"\n-------------------------------------"
+                                +",\nresponse.raw():"+response.raw());
                     }
 
                     @Override

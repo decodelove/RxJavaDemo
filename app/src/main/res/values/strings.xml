@@ -2,9 +2,13 @@
     <string name="app_name">RxJavaDemo</string>
     <string name="button1">指定线程</string>
     <string name="button2">基本用法</string>
-    <string name="button3">指定线程</string>
+    <string name="button3">界面布局</string>
     <string name="button4">指定线程</string>
     <string name="button5">Retrofig</string>
     <string name="ev_button">发送消息</string>
     <string name="rt_button">获取数据</string>
+    <string name="recycle_button1">ListView</string>
+    <string name="recycle_button2">GrideView</string>
+    <string name="recycle_button3">RecyclerView</string>
+
 </resources>

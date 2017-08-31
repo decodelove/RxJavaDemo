@@ -18,7 +18,12 @@
             </intent-filter>
         </activity>
         <activity android:name=".EventBusActivity"/>
-        <activity android:name="com.example.administrator.retrofitdemo.RetrofitDemo"/>
+        <activity android:name="com.example.administrator.retrofitdemo.RetrofitDemo"
+            android:configChanges="orientation"/>
+        <activity android:name="com.example.administrator.recyclerviewdemo.ChooseActivity"/>
+        <activity android:name="com.example.administrator.recyclerviewdemo.ListViewDemo"/>
+        <activity android:name="com.example.administrator.recyclerviewdemo.GrideViewDemo"/>
+        <activity android:name="com.example.administrator.recyclerviewdemo.RecyClerViewDemo"/>
     </application>
 
 </manifest>
